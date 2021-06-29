@@ -35,5 +35,5 @@ jobs:
       - run: git remote show origin
       - run: git remote set-url --push origin ${{git.respositoryUrl}}
       - run: git remote show origin
-      - run: git push --follow-tags origin HEAD: ${{git.respositoryUrl}}
+      - run: git push --follow-tags origin HEAD:${{git.respositoryUrl}}
 
