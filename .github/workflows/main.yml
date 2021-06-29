@@ -20,3 +20,6 @@ jobs:
           node-version: '14'
       - run: npm install
       - run: npm test
+        with:
+          bump_version_scheme: minor
+          release_body: "Version incremented by agent!"
