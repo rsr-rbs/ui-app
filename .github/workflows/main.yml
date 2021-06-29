@@ -22,5 +22,10 @@ jobs:
           release_body: "Version incremented by agent!"
       - run: npm install
       - run: npm test
-      - run: $GITHUB_CONTEXT
+      - run: npm version patch -m "release by ${GH_USERNAME}@users.noreply.github.com" --force
+      - run: git branch
+      - run: git remote show origin
+      - run: git remote set-url --push origin git@${{github.base_ref}}
+      - run: git remote show origin
+      - run: git push --follow-tags origin HEAD:${{github.base_ref}}
 
