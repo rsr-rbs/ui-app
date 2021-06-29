@@ -33,7 +33,7 @@ jobs:
       - run: npm version patch -m "release by agent" --force
       - run: git branch
       - run: git remote show origin
-      - run: git remote set-url --push origin "https://${{github.actor}}:${{github.token}}@github.com/${{input.repo}}.git"
+      - run: git remote set-url --push origin ${{git.respositoryUrl}}
       - run: git remote show origin
-      - run: git push --follow-tags origin HEAD:"https://${{github.actor}}:${{github.token}}@github.com/${{input.repo}}.git"
+      - run: git push --follow-tags origin HEAD: ${{git.respositoryUrl}}
 
