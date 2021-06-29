@@ -8,9 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      EMAIL: ravinder.singhrawat@natwest.com
-
+        
     strategy:
       matrix:
         node-version: [10.x, 14.x]
@@ -18,13 +16,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
+      - name: Set git username and email
+        run: |
+          #
+          git config --global user.email "${GH_USERNAME}@users.noreply.github.com"
+          git config --global user.name "${GH_USERNAME}"
+        env:
+          GH_USERNAME: ${{ github.event.schedule.user.login }}
+          
         with:
           node-version: '14'
           bump_version_scheme: minor
           release_body: "Version incremented by agent!"
       - run: npm install
       - run: npm test
-      - run: npm version patch -m "release by ${{env.EMAIL}}" --force
+      - run: npm version patch -m "release by agent" --force
       - run: git branch
       - run: git remote show origin
       - run: git remote set-url --push origin git@${{github.base_ref}}
