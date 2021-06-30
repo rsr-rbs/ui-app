@@ -31,7 +31,7 @@ jobs:
           release_body: "Version incremented by agent!"
       - run:  |
           #
-          git rest --hard
+          git reset --hard
           npm install
           npm test
           npm version patch -m "release by agent" --force
