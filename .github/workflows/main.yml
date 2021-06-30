@@ -29,11 +29,13 @@ jobs:
           node-version: '14'
           bump_version_scheme: minor
           release_body: "Version incremented by agent!"
-      - run: npm install
-      - run: npm test
-      - run: npm version patch -m "release by agent" --force
-      - run: git pull
-      - run: git add .
-      - run: git commit -m "generated"
-      - run: git push
+      - run:  |
+          #
+          npm install
+          npm test
+          npm version patch -m "release by agent" --force
+          git pull
+          git add .
+          git commit -m "generated"
+          git push
 
