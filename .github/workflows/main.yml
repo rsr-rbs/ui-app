@@ -17,19 +17,24 @@ jobs:
           #
           git config --global user.email "${{github.actor}}@natwest.com"
           git config --global user.name "${{github.actor}}"
-        env:
-          GH_USERNAME: ${{ github.event.schedule.user.login }}
       
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          bump_version_scheme: minor
-          release_body: "Version incremented by agent!"
       - run:  |
           #
           npm install
           npm test
           npm version patch -m "release by agent" --force
           git push --follow-tags
+      
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: mkdir -p path/to/artifact
+      - run: echo hello > path/to/artifact/world.txt
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: path/to/artifact/world.txt
 
