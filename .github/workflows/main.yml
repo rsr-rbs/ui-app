@@ -31,10 +31,10 @@ jobs:
           release_body: "Version incremented by agent!"
       - run:  |
           #
+          git rest --hard
           npm install
           npm test
           npm version patch -m "release by agent" --force
-          git pull
           git add .
           git commit -m "generated"
           git push
