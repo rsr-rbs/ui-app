@@ -31,9 +31,7 @@ jobs:
       - run: npm install
       - run: npm test
       - run: npm version patch -m "release by agent" --force
-      - run: git branch
-      - run: git remote show origin
-      - run: git remote set-url --push origin ${{github.respositoryUrl}}
-      - run: git remote show origin
-      - run: git push --follow-tags origin HEAD:${{github.respositoryUrl}}
+      - run: git add .
+      - run: git commit -m "generated"
+      - run: git push
 
