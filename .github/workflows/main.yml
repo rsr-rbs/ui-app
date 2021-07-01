@@ -1,6 +1,10 @@
 name: publish
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - '*'
+  workflow_dispatch:
 
 jobs:
   build:
